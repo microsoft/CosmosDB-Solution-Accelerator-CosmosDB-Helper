@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <StartupObject></StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\libraries\Microsoft.Solutions.CosmosDB.EFCore\Microsoft.Solutions.CosmosDB.EFCore.csproj" />
+    <ProjectReference Include="..\..\libraries\Microsoft.Solutions.CosmosDB\Microsoft.Solutions.CosmosDB.csproj" />
+  </ItemGroup>
+
+</Project>

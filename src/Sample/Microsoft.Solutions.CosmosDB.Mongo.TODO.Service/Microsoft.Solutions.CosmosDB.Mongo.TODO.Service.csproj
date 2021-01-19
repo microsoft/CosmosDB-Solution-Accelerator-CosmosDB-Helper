@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;MONGO</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\libraries\Microsoft.Solutions.CosmosDB.Mongo\Microsoft.Solutions.CosmosDB.Mongo.csproj" />
+    <ProjectReference Include="..\..\libraries\Microsoft.Solutions.CosmosDB\Microsoft.Solutions.CosmosDB.csproj" />
+  </ItemGroup>
+
+</Project>
