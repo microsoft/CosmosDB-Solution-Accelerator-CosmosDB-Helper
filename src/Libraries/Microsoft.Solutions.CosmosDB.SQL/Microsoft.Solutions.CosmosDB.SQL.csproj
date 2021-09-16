@@ -4,12 +4,13 @@
     <TargetFramework>net5.0</TargetFramework>
     <Title>Microsoft CosmosDB Solution Accelerator - CosmosDB Helper for SQL(using SDK)</Title>
     <PackageId>EAE.Solutions.CosmosDB.SQL</PackageId>
-    <Version>0.6.1</Version>
-    <Authors>DB Lee</Authors>
+    <Version>0.7.0</Version>
+    <Authors>Microsoft Solutions</Authors>
     <Company>Microsoft Coporation</Company>
     <PackageDescription>This library helps using CosmosDB to developers...</PackageDescription>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+    <PackageProjectUrl>https://github.com/microsoft/CosmosDB-Solution-Accelerator-CosmosDB-Helper</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,7 +25,7 @@
   </ItemGroup>
   <Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
     <ItemGroup>
-      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))"/>
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
     </ItemGroup>
   </Target>
 </Project>

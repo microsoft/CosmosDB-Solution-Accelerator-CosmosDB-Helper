@@ -1,9 +1,37 @@
-# CosmosDB Solution Accelerator for Developers (CosmosDB Helper Library)
+# Azure CosmosDB Solution Accelerator for Developers  <br/>(Azure CosmosDB Helper Library)
 
 ## About this repository
-This Repository contains CosmosDB Helper Library source code and descriptions how to use it.
-These resources help Developers quickly build applications with cosmosDB on Azure.
+Welcome to Azure CosmosDB Solution Accelerator (Azure CosmosDB Helper).  
 
+Azure CosmosDB Helper supports MongoDB API and SQL Core API interface with LINQ statements.  
+Developers can their Business Entities CRUD Operations without learning specific query languages for each APIs.  
+Once your business logic has been built with LINQ statements with Azure CosmosDB Helper, you may easily switch two APIs with very few code changes.    
+
+This Repository contains Azure CosmosDB Helper Library source code and Hands on descriptions for how to use it.  
+
+## Version History
+- ### v 0.7 Update  
+   - #### Change feed processor for Azure CosmosDB Core SQL API  
+      - **Microsoft.Solutions.CosmosDB.SQL.ChangeFeed** (ChangeFeed Processor Helper) has been released  
+        - Automatic lease container creation  
+        - Multiple process host support for parallel execution in Microservice deployment
+        - Delegate process template for detecting ChangeSets. 
+          
+
+   - #### Improved performance with optimized Connection Object 
+   
+   - #### CosmosEntityBase Name has been changed to **CosmosDBEntityBase**  
+     - Azure CosmosDB Core SQL API EF Core <span style="color:red">Deprecated</span>
+        - Azure CosmosDB Provider - EF Core wrapper has been deprecated  
+          (EF Core Framework's performance issue)  
+        
+- ### v 0.6 First Release  
+   - #### Azure CosmosDB Core SQL API support   
+       - Azure CosmosDB SDK wrapper  
+       - Azure CosmosDB Provider - EF Core wrapper  
+   - #### Azure CosmosDB MongoDB SQL API Support  
+       - MongoDB.Driver wrapper  
+       
 ## Prerequisites
 This source code has been built with .NET framework 5.0
 (but you may build it with .NET Core 3.1 as well)
@@ -12,7 +40,7 @@ This source code has been built with .NET framework 5.0
 CosmosDB Solution Accelerator helps developers who wants to use CosmosDB with **SIMPLE** and **DEVELOPMENT CONSISTENCY**.  
 Developers can easily switch CosmosDB APIs between SQL API and Mongo API with little changes
 
-## How to Use it
+## How to Work with it
 You may start with [HandsOn](./HandsOn.md) page.  
 All of libraries can be referenced though [Nuget packages](https://www.nuget.org/packages?q=EAE.Solutions) to your project.
 

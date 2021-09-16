@@ -27,6 +27,7 @@ namespace Microsoft.Solutions.CosmosDB.SQL.SDK.TODO.Service.Tests
         {
             var result = await todoService.Create("test title", Status.New, 0, DateTime.Today, DateTime.Today.AddDays(7), "bla bla");
             objectId = result.id;
+            Console.WriteLine(objectId);
         }
 
         [TestMethod()]

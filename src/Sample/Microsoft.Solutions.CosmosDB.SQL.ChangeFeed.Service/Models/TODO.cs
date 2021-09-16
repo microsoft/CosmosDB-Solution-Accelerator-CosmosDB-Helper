@@ -3,9 +3,9 @@
 
 using System;
 
-namespace Microsoft.Solutions.CosmosDB.EFCore.TODO.Service.Models
+namespace Microsoft.Solutions.CosmosDB.SQL.ChangeFeed.Service.Models
 {
-    public class ToDo : CosmosEntityBase
+    public class ToDo : CosmosDBEntityBase
     {
         public string title { get; set; }
         public Status status { get; set; }

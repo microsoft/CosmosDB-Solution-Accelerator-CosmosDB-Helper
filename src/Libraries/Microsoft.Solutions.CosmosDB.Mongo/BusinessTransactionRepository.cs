@@ -4,14 +4,15 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using MongoDB.Driver.Core;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using System.Linq;
 
 
 namespace Microsoft.Solutions.CosmosDB.Mongo
 {
-    public class BusinessTransactionRepository<TEntity, TIdentifier> : IRepository<TEntity, TIdentifier> where TEntity : class, IEntityModel<string>
+    public class BusinessTransactionRepository<TEntity, TIdentifier> : IRepository<TEntity, TIdentifier> where TEntity : class, IEntityModel<TIdentifier>
     {
         private readonly IMongoDatabase _database;
 
@@ -39,15 +40,34 @@ namespace Microsoft.Solutions.CosmosDB.Mongo
         public async Task<IEnumerable<TEntity>> FindAllAsync(FilterDefinition<TEntity> builders)
         {
             var collection = _database.GetCollection<TEntity>(typeof(TEntity).Name.ToLowerInvariant());
+
             return (await collection.FindAsync(builders)).ToList<TEntity>();
         }
-
 
 
         public async Task<IEnumerable<TEntity>> FindAllAsync(ISpecification<TEntity> specification)
         {
             var collection = _database.GetCollection<TEntity>(typeof(TEntity).Name.ToLowerInvariant());
-            return (await collection.FindAsync(specification.Predicate)).ToList<TEntity>();
+            
+            GenericSpecification<TEntity> genericSpecification = specification as GenericSpecification<TEntity>;
+
+            if (genericSpecification.OrderBy == null)
+            {
+                return (await collection.FindAsync(specification.Predicate)).ToList<TEntity>();
+            }
+            else if (genericSpecification.Order == Order.Asc)
+            {
+                return (await collection.FindAsync(specification.Predicate, new FindOptions<TEntity>() { Sort = Builders<TEntity>.Sort.Ascending(specification.OrderBy) })).ToList<TEntity>();
+                        
+            }
+            else if (genericSpecification.Order == Order.Desc)
+            {
+                return (await collection.FindAsync(specification.Predicate, new FindOptions<TEntity>() { Sort = Builders<TEntity>.Sort.Descending(specification.OrderBy) })).ToList<TEntity>();
+            }
+            else
+            {
+                return null;
+            }
         }
 
 
@@ -93,14 +113,14 @@ namespace Microsoft.Solutions.CosmosDB.Mongo
             return entity;
         }
 
-        public async Task DeleteAsync(TIdentifier entityId)
+        public async Task DeleteAsync(TIdentifier entityId, dynamic partitionKeyValue = null)
         {
             var collection = _database.GetCollection<TEntity>(typeof(TEntity).Name.ToLowerInvariant());
 
             await collection.DeleteOneAsync(x => x.id.Equals(entityId));
         }
 
-        public async Task DeleteAsync(TEntity entity)
+        public async Task DeleteAsync(TEntity entity, dynamic partitionKeyValue = null)
         {
             var collection = _database.GetCollection<TEntity>(typeof(TEntity).Name.ToLowerInvariant());
 

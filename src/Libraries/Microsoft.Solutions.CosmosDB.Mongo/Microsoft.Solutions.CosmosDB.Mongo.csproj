@@ -3,13 +3,14 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <Title>Microsoft CosmosDB Solution Accelerator - CosmosDB Helper for Mongo API</Title>
-    <PackageId>EAE.Solutions.CosmosDB.Mongo</PackageId>
-    <Version>0.6.1</Version>
-    <Authors>DB Lee</Authors>
+    <PackageId>EAE,Solutions.CosmosDB.Mongo</PackageId>
+    <Version>0.7.0</Version>
+    <Authors>Microsoft Solutions</Authors>
     <Company>Microsoft Coporation</Company>
     <PackageDescription>This library helps using CosmosDB to developers...</PackageDescription>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+    <PackageProjectUrl>https://github.com/microsoft/CosmosDB-Solution-Accelerator-CosmosDB-Helper</PackageProjectUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -18,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.11.5" />
+    <PackageReference Include="MongoDB.Driver" Version="2.13.1" />
   </ItemGroup>
 
 
@@ -30,7 +31,7 @@
   </ItemGroup>
   <Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
     <ItemGroup>
-      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths->WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
     </ItemGroup>
   </Target>
 
