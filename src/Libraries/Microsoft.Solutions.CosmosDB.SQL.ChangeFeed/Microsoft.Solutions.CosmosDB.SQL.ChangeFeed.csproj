@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+	  <Title>Microsoft CosmosDB Solution Accelerator - CosmosDB Helper for SQL(using SDK)</Title>
+	  <PackageId>EAE.Solutions.CosmosDB.SQL.ChangeFeed</PackageId>
+	  <Version>0.7.0</Version>
+	  <Authors>Microsoft Solutions</Authors>
+	  <Company>Microsoft Coporation</Company>
+	  <PackageDescription>This library helps using CosmosDB to developers...</PackageDescription>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
+	  <PackageProjectUrl>https://github.com/microsoft/CosmosDB-Solution-Accelerator-CosmosDB-Helper</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.20.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Microsoft.Solutions.CosmosDB\Microsoft.Solutions.CosmosDB.csproj">
+			<ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+			<IncludeAssets>Microsoft.Solutions.CosmosDB.dll</IncludeAssets>
+		</ProjectReference>
+	</ItemGroup>
+	<Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
+		<ItemGroup>
+			<BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
+		</ItemGroup>
+	</Target>
+
+</Project>

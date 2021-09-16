@@ -2,7 +2,7 @@
 // Licensed under the MIT License.
 
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Solutions.CosmosDB.EFCore.TODO.Service.Models;
+using Microsoft.Solutions.CosmosDB.SQL.SDK.TODO.Service.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

@@ -12,5 +12,6 @@ namespace Microsoft.Solutions.CosmosDB
         /// Gets or sets the func delegate query to execute against the repository for searching records.
         /// </summary>
         Expression<Func<TEntity, bool>> Predicate { get; }
+        Expression<Func<TEntity, dynamic>> OrderBy { get; }
     }
 }

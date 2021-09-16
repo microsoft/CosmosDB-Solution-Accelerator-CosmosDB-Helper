@@ -14,20 +14,28 @@ namespace Microsoft.Solutions.CosmosDB.SQL
     {
         private readonly Database _database;
         private readonly Container _container;
-        private static bool ensured = false;
+        static bool _checkedDatabase = false;
 
-        public BusinessTransactionRepository(CosmosClient client, string DatabaseName)
+        public BusinessTransactionRepository(CosmosClient client, string DatabaseName, string containerName = "")
         {
-            if (!BusinessTransactionRepository<TEntity, TIdentifier>.ensured)
+            if (!BusinessTransactionRepository<TEntity, TIdentifier>._checkedDatabase)
             {
                 _database = client.CreateDatabaseIfNotExistsAsync(DatabaseName).Result;
-                _container = _database.CreateContainerIfNotExistsAsync(typeof(TEntity).Name + "s", "/__partitionkey").Result;
-                BusinessTransactionRepository<TEntity, TIdentifier>.ensured = true;
-
-            } else
+                BusinessTransactionRepository<TEntity, TIdentifier>._checkedDatabase = true;
+            }
+            else
             {
                 _database = client.GetDatabase(DatabaseName);
-                _container = _database.GetContainer(typeof(TEntity).Name + "s");
+            }
+
+
+            if (string.IsNullOrEmpty(containerName))
+            {
+                _container = _database.CreateContainerIfNotExistsAsync(typeof(TEntity).Name + "s", "/__partitionkey").Result;
+            }
+            else
+            {
+                _container = _database.GetContainer(containerName);
             }
         }
 
@@ -35,15 +43,16 @@ namespace Microsoft.Solutions.CosmosDB.SQL
         public async Task<TEntity> GetAsync(TIdentifier id)
         {
             var iterator = this._container.GetItemQueryIterator<TEntity>($"select * from c where c.id = '{id.ToString()}'");
-            if (iterator.HasMoreResults)
-            {
-                return (await iterator.ReadNextAsync()).FirstOrDefault<TEntity>();
 
-            }
-            else
+            while (iterator.HasMoreResults)
             {
-                return null;
+                foreach (var item in await iterator.ReadNextAsync())
+                {
+                    return item;
+                }
             }
+
+            return null;
         }
 
         public async Task<TEntity> AddAsync(TEntity entity)
@@ -56,15 +65,15 @@ namespace Microsoft.Solutions.CosmosDB.SQL
         {
             var iterator = this._container.GetItemLinqQueryable<TEntity>().Where(specification.Predicate).ToFeedIterator();
 
-            if (iterator.HasMoreResults)
+            while (iterator.HasMoreResults)
             {
-                return (await iterator.ReadNextAsync()).FirstOrDefault();
+                foreach (var item in await iterator.ReadNextAsync())
+                {
+                    return item;
+                }
+            }
 
-            }
-            else
-            {
-                return null;
-            }
+            return null;
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()
@@ -87,7 +96,25 @@ namespace Microsoft.Solutions.CosmosDB.SQL
 
         public async Task<IEnumerable<TEntity>> FindAllAsync(ISpecification<TEntity> specification)
         {
-            var iterator = this._container.GetItemLinqQueryable<TEntity>().Where(specification.Predicate).ToFeedIterator();
+            GenericSpecification<TEntity> genericSpecification = specification as GenericSpecification<TEntity>;
+
+            FeedIterator<TEntity> iterator = null;
+
+            if (genericSpecification.OrderBy == null)
+            {
+                iterator = this._container.GetItemLinqQueryable<TEntity>().Where(specification.Predicate).ToFeedIterator();
+            }
+            else
+            {
+                if (genericSpecification.Order == Order.Asc)
+                {
+                    iterator = this._container.GetItemLinqQueryable<TEntity>().Where(specification.Predicate).OrderBy(specification.OrderBy).ToFeedIterator();
+                }
+                else
+                {
+                    iterator = this._container.GetItemLinqQueryable<TEntity>().Where(specification.Predicate).OrderByDescending(specification.OrderBy).ToFeedIterator();
+                }
+            }
 
             List<TEntity> results = new List<TEntity>();
 
@@ -109,7 +136,7 @@ namespace Microsoft.Solutions.CosmosDB.SQL
 
             foreach (var id in identifiers)
             {
-                var iterator = this._container.GetItemLinqQueryable<TEntity>().Where(x => x.id.Equals(id)).ToFeedIterator();
+                var iterator = this._container.GetItemQueryIterator<TEntity>($"select * from c where c.id = '{id.ToString()}'");
 
                 while (iterator.HasMoreResults)
                 {
@@ -132,17 +159,48 @@ namespace Microsoft.Solutions.CosmosDB.SQL
 
         }
 
-        public async Task DeleteAsync(TIdentifier EntityId)
+        public async Task DeleteAsync(TIdentifier EntityId, dynamic partitionKeyValue = null)
         {
-            var cosmosEntity = await this.GetAsync(EntityId) as CosmosEntityBase;
-            await this._container.DeleteItemAsync<TEntity>(EntityId.ToString(), new PartitionKey(cosmosEntity.__partitionkey) );
+            var cosmosEntity = await this.GetAsync(EntityId) as TEntity;
+
+            if (partitionKeyValue == null)
+            {
+                await this._container.DeleteItemAsync<TEntity>(cosmosEntity.id.ToString(), new PartitionKey(cosmosEntity.__partitionkey));
+            }
+            else
+            {
+                await this._container.DeleteItemAsync<TEntity>(cosmosEntity.id.ToString(), new PartitionKey(partitionKeyValue));
+            }
+        }
+
+        public async Task DeleteAsync(TEntity entity, dynamic partitionKeyValue = null)
+        {
+            var cosmosEntity = entity as CosmosDBEntityBase;
+
+            if (partitionKeyValue == null)
+            {
+                await this._container.DeleteItemAsync<TEntity>(entity.id.ToString(), new PartitionKey(cosmosEntity.__partitionkey));
+            }
+            else
+            {
+                await this._container.DeleteItemAsync<TEntity>(entity.id.ToString(), new PartitionKey(partitionKeyValue));
+            }
 
         }
 
-        public async Task DeleteAsync(TEntity entity)
+        public async Task<TEntity> Find(ISpecification<TEntity> specification)
         {
-            var cosmosEntity = entity as CosmosEntityBase;
-            await this._container.DeleteItemAsync<TEntity>(entity.id.ToString(), new PartitionKey(cosmosEntity.__partitionkey));
+            var iterator = this._container.GetItemLinqQueryable<TEntity>().Where(specification.Predicate).ToFeedIterator();
+
+            while (iterator.HasMoreResults)
+            {
+                foreach (var item in await iterator.ReadNextAsync())
+                {
+                    return item;
+                }
+            }
+
+            return null;
         }
     }
 }

@@ -7,12 +7,12 @@ using System.Text;
 
 namespace Microsoft.Solutions.CosmosDB
 {
-    public class CosmosEntityBase : IEntityModel<string>
+    public class CosmosDBEntityBase : IEntityModel<string>
     {
-        public CosmosEntityBase()
+        public CosmosDBEntityBase()
         {
             this.id = Guid.NewGuid().ToString();
-            this.__partitionkey = CosmosEntityBase.GetKey(id, 9999);
+            this.__partitionkey = CosmosDBEntityBase.GetKey(id, 9999);
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Microsoft.Solutions.CosmosDB
 
         static SHA1 _sha1;
 
-        static CosmosEntityBase()
+        static CosmosDBEntityBase()
         {
             _sha1 = SHA1.Create();
         }
@@ -35,7 +35,7 @@ namespace Microsoft.Solutions.CosmosDB
         /// <summary>
         /// Generate partitionkey for CosmosDB
         /// using SHA1 hash with id, convert it to uint and divide with number of partitions
-        /// assigned default value as 1000 (1000 partition at this moment)
+        /// assigned default value as 9999 (9999 partition at this moment)
         /// </summary>
         /// <param name="id"></param>
         /// <param name="numberofPartitions"></param>

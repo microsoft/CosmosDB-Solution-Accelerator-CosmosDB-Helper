@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Microsoft.Solutions.CosmosDB.SQL.ChangeFeed.Service": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": "true"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

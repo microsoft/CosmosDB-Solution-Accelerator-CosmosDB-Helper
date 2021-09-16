@@ -7,8 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using Microsoft.Solutions.CosmosDB.EFCore.TODO.Service;
-using Microsoft.Solutions.CosmosDB.EFCore.TODO.Service.Models;
+using Microsoft.Solutions.CosmosDB.SQL.SDK.TODO.Service;
+using Microsoft.Solutions.CosmosDB.SQL.SDK.TODO.Service.Models;
 
 namespace Microsoft.Solutions.CosmosDB.TODO.WebHost
 {

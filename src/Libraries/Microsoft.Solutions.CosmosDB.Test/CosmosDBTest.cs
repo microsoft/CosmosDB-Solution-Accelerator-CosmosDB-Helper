@@ -2,7 +2,6 @@
 // Licensed under the MIT License.      
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.Solutions.CosmosDB.EFCore;
 using System.Threading.Tasks;
 using System.Linq;
 using System;
@@ -15,6 +14,7 @@ namespace Microsoft.Solutions.CosmosDB.Test
     public class CosmosDBLibTest
     {
         public static IRepository<Person, string> repository = null;
+
         private static string cosmossqlConn = "{PUT YOUR COSMOS SQL API CONNECTION STRING}";
         private static string cosmosmongoConn = "{PUT YOUR COSMOS MONGO API CONNECTION STRING}";
 
@@ -24,13 +24,12 @@ namespace Microsoft.Solutions.CosmosDB.Test
         public void TestInit()
         {
             //Mongo Test
-            Repository = new MongoRepository(cosmosmongoConn, "MongoTEST");
+            //Repository = new MongoRepository(cosmosmongoConn, "MongoTEST");
 
-            //EF Test
-            //Repository = new CosmosEFRepository(cosmossqlConn, "EFTEST");
+            
 
             //SQL SDK Test
-            //Repository = new CosmosEFRepository(cosmossqlConn, "SDKTEST");
+            Repository = new CosmosSQLRepository(cosmossqlConn, "SDKTEST");
 
         }
 
@@ -87,6 +86,21 @@ namespace Microsoft.Solutions.CosmosDB.Test
                 System.Console.WriteLine($"{item.name} - {item.gender} - {item.title} - {item.age}");
             }
 
+            Console.WriteLine($"Order by name ASC");
+            results = await repository.FindAllAsync(new GenericSpecification<Person>(x => x.age > 10, x => x.name, Order.Asc));
+            foreach (var item in results)
+            {
+                System.Console.WriteLine($"{item.name} - {item.gender} - {item.title} - {item.age}");
+            }
+
+            Console.WriteLine($"Order by name DESC");
+            results = await repository.FindAllAsync(new GenericSpecification<Person>(x => x.age > 10, x => x.name, Order.Desc));
+            foreach (var item in results)
+            {
+                System.Console.WriteLine($"{item.name} - {item.gender} - {item.title} - {item.age}");
+            }
+
+
             Assert.AreNotSame(0, results.Count());
         }
 
@@ -117,7 +131,7 @@ namespace Microsoft.Solutions.CosmosDB.Test
 
             await repository.DeleteAsync(_30agedperson);
 
-            Console.WriteLine($"{_30agedperson.id} object has been delete");
+            Console.WriteLine($"{_30agedperson.id} object has been deleted");
         }
 
         [TestMethod]
@@ -128,21 +142,13 @@ namespace Microsoft.Solutions.CosmosDB.Test
 
             await repository.DeleteAsync(_30agedperson.id);
 
-            Console.WriteLine($"{_30agedperson.id} object has been delete");
+            Console.WriteLine($"{_30agedperson.id} object has been deleted");
         }
     }
 
     public class MongoRepository : MongoEntntyCollectionBase<Person>
     {
         public MongoRepository(string DataConnectionString, string CollectionName) : base(DataConnectionString, CollectionName)
-        {
-            CosmosDBLibTest.repository = this.EntityCollection;
-        }
-    }
-
-    public class CosmosEFRepository : EFCoreEntityCollectionBase<Person>
-    {
-        public CosmosEFRepository(string DataConnectionString, string CollectionName) : base(DataConnectionString, CollectionName)
         {
             CosmosDBLibTest.repository = this.EntityCollection;
         }
@@ -156,7 +162,7 @@ namespace Microsoft.Solutions.CosmosDB.Test
         }
     }
 
-    public class Person : CosmosEntityBase
+    public class Person : CosmosDBEntityBase
     {
         public string name { get; set; }
         public int age { get; set; }

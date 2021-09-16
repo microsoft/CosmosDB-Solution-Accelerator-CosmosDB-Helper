@@ -4,6 +4,7 @@
 using Microsoft.Solutions.CosmosDB.Mongo.TODO.Service;
 using Microsoft.Solutions.CosmosDB.Mongo.TODO.Service.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -13,7 +14,7 @@ namespace Microsoft.Solutions.CosmosDB.Mongo.TODO.Tests
     public class TODOServiceTests
     {
         static TODOService todoService;
-        static string mongoConnString = "{put your connection string}";
+        static string mongoConnString = "{Put Your ConnectionString}";
         static string objectId;
 
         [TestInitialize]
@@ -55,7 +56,7 @@ namespace Microsoft.Solutions.CosmosDB.Mongo.TODO.Tests
         public async Task TEST04_RemoveTODOTest()
         {
             var createdTodoObj = await todoService.Find(objectId);
-            Console.WriteLine($"{createdTodoObj} will be removed");
+            Console.WriteLine($"{JsonConvert.SerializeObject(createdTodoObj)} will be removed");
             await todoService.Delete(objectId);
         }
 

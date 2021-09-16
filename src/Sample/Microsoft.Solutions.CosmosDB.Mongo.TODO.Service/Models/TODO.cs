@@ -5,7 +5,7 @@ using System;
 
 namespace Microsoft.Solutions.CosmosDB.Mongo.TODO.Service.Models
 {
-    public class ToDo : CosmosEntityBase
+    public class ToDo : CosmosDBEntityBase
     {
         public string title { get; set; }
         public Status status { get; set; }
