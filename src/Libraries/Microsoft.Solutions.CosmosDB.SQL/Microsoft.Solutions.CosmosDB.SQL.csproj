@@ -4,7 +4,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <Title>Microsoft CosmosDB Solution Accelerator - CosmosDB Helper for SQL(using SDK)</Title>
     <PackageId>EAE.Solutions.CosmosDB.SQL</PackageId>
-    <Version>0.7.0</Version>
+    <Version>0.7.1</Version>
     <Authors>Microsoft Solutions</Authors>
     <Company>Microsoft Coporation</Company>
     <PackageDescription>This library helps using CosmosDB to developers...</PackageDescription>
