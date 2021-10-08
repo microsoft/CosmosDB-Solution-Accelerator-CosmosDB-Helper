@@ -12,14 +12,20 @@ namespace Microsoft.Solutions.CosmosDB.SQL
     {
         public IRepository<TEntity, string> EntityCollection { get ;  init ; }
 
-        public SQLEntityCollectionBase(string DataConnectionString, string CollectionName)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="DataConnectionString">Connection String</param>
+        /// <param name="CollectionName">Your Database Name</param>
+        /// <param name="ContainerName">(Optional) If you don't pass it, The Container will be created by Entity Model Class Name + "s", In Model First Dev, You don't need to use it</param>
+        public SQLEntityCollectionBase(string DataConnectionString, string CollectionName, string ContainerName = "")
         {
             CosmosClientManager.DataconnectionString = DataConnectionString;
             CosmosClient _client = CosmosClientManager.Instance;
 
             this.EntityCollection = 
                 new BusinessTransactionRepository<TEntity, string>(_client,
-                CollectionName);
+                CollectionName, ContainerName);
             
         }
     }

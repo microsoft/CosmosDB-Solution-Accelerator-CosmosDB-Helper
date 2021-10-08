@@ -10,7 +10,7 @@ namespace Microsoft.Solutions.CosmosDB.SQL.SDK.TODO.Service
 {
     public class TODOService : SQLEntityCollectionBase<ToDo>
     {
-        public TODOService(string DataConnectionString, string CollectionName) : base(DataConnectionString, CollectionName)
+        public TODOService(string DataConnectionString, string CollectionName, string EntitySetName) : base(DataConnectionString, CollectionName, EntitySetName)
         {
         }
 
