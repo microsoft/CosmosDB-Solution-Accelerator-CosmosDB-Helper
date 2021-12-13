@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <PackageId>EAE.Solutions.CosmosDB.Security.ManagedIdentity</PackageId>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>0.7.3</Version>
+    <Authors>Microsoft Solutions</Authors>
+    <Company>Microsoft Coporation</Company>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Azure.Identity" Version="1.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Utils\Microsoft.Solutions.HTTP\Microsoft.Solutions.HTTP.csproj" />
+  </ItemGroup>
+
+</Project>
