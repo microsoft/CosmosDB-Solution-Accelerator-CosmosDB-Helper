@@ -70,7 +70,7 @@ After switching the directory, add package Reference with Nuget installation
 
 ```
 
-    dotnet add package EAE.Solutions.CosmosDB.SQL --version 0.7.0
+    dotnet add package EAE.Solutions.CosmosDB.SQL --version 0.7.3
 
 ```
 
@@ -424,7 +424,7 @@ Try to Add Azure CosmosDB mongo Helper library with nuget package reference in y
 
 ``` 
 
-    dotnet add package EAE.Solutions.CosmosDB.Mongo --version 0.7.0
+    dotnet add package EAE.Solutions.CosmosDB.Mongo --version 0.7.3
 
 ```
 
@@ -611,7 +611,7 @@ This Nuget package contains Watcher class in Microsoft.Solutions.CosmosDB.SQL.Ch
 
 ```
 
-    dotnet add package EAE.Solutions.CosmosDB.SQL.ChangeFeed --version 0.7.0
+    dotnet add package EAE.Solutions.CosmosDB.SQL.ChangeFeed --version 0.7.3
 
 ```
 

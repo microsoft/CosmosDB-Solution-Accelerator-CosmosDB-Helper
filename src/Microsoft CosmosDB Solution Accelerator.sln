@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30711.63
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{E36FC976-3345-4988-B710-C7F5DEAD2EF6}"
 EndProject
@@ -32,6 +32,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Solutions.CosmosDB.Test", "libraries\Microsoft.Solutions.CosmosDB.Test\Microsoft.Solutions.CosmosDB.Test.csproj", "{228A0A82-EF20-459D-A9CD-564EC02A45E2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Solutions.CosmosDB.Mongo", "libraries\Microsoft.Solutions.CosmosDB.Mongo\Microsoft.Solutions.CosmosDB.Mongo.csproj", "{0D8BC6A2-04D9-4A13-8C7F-96AA320BBEE1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Solutions.CosmosDB.Security.ManagedIdentity", "libraries\Microsoft.Solutions.CosmosDB.Security.ManagedIdentity\Microsoft.Solutions.CosmosDB.Security.ManagedIdentity.csproj", "{88B10D30-4A93-4BC0-9CF5-F813B40A6943}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{1E21D3A9-D00F-45AF-99EC-BF8123ACE33F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.Solutions.HTTP", "Utils\Microsoft.Solutions.HTTP\Microsoft.Solutions.HTTP.csproj", "{50FC98FF-EAE1-478D-B9F9-846DA11372AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -106,6 +112,18 @@ Global
 		{0D8BC6A2-04D9-4A13-8C7F-96AA320BBEE1}.DebugWithSymbol|Any CPU.Build.0 = Debug|Any CPU
 		{0D8BC6A2-04D9-4A13-8C7F-96AA320BBEE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D8BC6A2-04D9-4A13-8C7F-96AA320BBEE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88B10D30-4A93-4BC0-9CF5-F813B40A6943}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88B10D30-4A93-4BC0-9CF5-F813B40A6943}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88B10D30-4A93-4BC0-9CF5-F813B40A6943}.DebugWithSymbol|Any CPU.ActiveCfg = Debug|Any CPU
+		{88B10D30-4A93-4BC0-9CF5-F813B40A6943}.DebugWithSymbol|Any CPU.Build.0 = Debug|Any CPU
+		{88B10D30-4A93-4BC0-9CF5-F813B40A6943}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88B10D30-4A93-4BC0-9CF5-F813B40A6943}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50FC98FF-EAE1-478D-B9F9-846DA11372AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50FC98FF-EAE1-478D-B9F9-846DA11372AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50FC98FF-EAE1-478D-B9F9-846DA11372AD}.DebugWithSymbol|Any CPU.ActiveCfg = Debug|Any CPU
+		{50FC98FF-EAE1-478D-B9F9-846DA11372AD}.DebugWithSymbol|Any CPU.Build.0 = Debug|Any CPU
+		{50FC98FF-EAE1-478D-B9F9-846DA11372AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50FC98FF-EAE1-478D-B9F9-846DA11372AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -124,6 +142,8 @@ Global
 		{0F6953CF-37F3-4759-AF46-A62ABB49D76C} = {9CF5C149-650A-42C4-A08E-0A066FE7721A}
 		{228A0A82-EF20-459D-A9CD-564EC02A45E2} = {F75FAB67-13B6-4A4D-8FD9-C30D4A7B648F}
 		{0D8BC6A2-04D9-4A13-8C7F-96AA320BBEE1} = {F75FAB67-13B6-4A4D-8FD9-C30D4A7B648F}
+		{88B10D30-4A93-4BC0-9CF5-F813B40A6943} = {F75FAB67-13B6-4A4D-8FD9-C30D4A7B648F}
+		{50FC98FF-EAE1-478D-B9F9-846DA11372AD} = {1E21D3A9-D00F-45AF-99EC-BF8123ACE33F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5A9383CD-0E2F-46A6-8783-0315851AAD4C}

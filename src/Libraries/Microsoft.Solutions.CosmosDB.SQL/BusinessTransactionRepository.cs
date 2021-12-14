@@ -3,6 +3,7 @@
 
 using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Cosmos.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace Microsoft.Solutions.CosmosDB.SQL
         private readonly Database _database;
         private readonly Container _container;
         static bool _checkedDatabase = false;
+        static bool _checkedContainer = false;
 
         public BusinessTransactionRepository(CosmosClient client, string DatabaseName, string containerName = "")
         {
@@ -29,13 +31,45 @@ namespace Microsoft.Solutions.CosmosDB.SQL
             }
 
 
+
             if (string.IsNullOrEmpty(containerName))
             {
-                _container = _database.CreateContainerIfNotExistsAsync(typeof(TEntity).Name + "s", "/__partitionkey").Result;
+                if (BusinessTransactionRepository<TEntity, TIdentifier>._checkedContainer)
+                {
+                    _container = _database.GetContainer(typeof(TEntity).Name + "s");
+                }
+                else
+                {
+                    _container = _database.CreateContainerIfNotExistsAsync(typeof(TEntity).Name + "s", "/__partitionkey").Result;
+                    BusinessTransactionRepository<TEntity, TIdentifier>._checkedContainer = true;
+                }
             }
             else
             {
-                _container = _database.GetContainer(containerName);
+                if (BusinessTransactionRepository<TEntity, TIdentifier>._checkedContainer)
+                {
+                    _container = _database.GetContainer(containerName);
+                }
+                else
+                {
+                    try
+                    {
+                        //Try to check it is in the database
+                        _container = _database.CreateContainerAsync(containerName, "/__partitionkey").Result;
+                        BusinessTransactionRepository<TEntity, TIdentifier>._checkedContainer = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        var cosmosException = ex.InnerException as CosmosException;
+
+                        if ((cosmosException) != null)
+                            if (cosmosException.StatusCode == System.Net.HttpStatusCode.Conflict)
+                            {
+                                _container = _database.GetContainer(containerName);
+                                BusinessTransactionRepository<TEntity, TIdentifier>._checkedContainer = true;
+                            }
+                    }
+                }
             }
         }
 

@@ -1,4 +1,4 @@
-# Azure CosmosDB Solution Accelerator for Developers  <br/>(Azure CosmosDB Helper Library)
+# Azure CosmosDB Solution Accelerator for Developers </br>(Azure CosmosDB Helper Library)
 
 ## About this repository
 Welcome to Azure CosmosDB Solution Accelerator (Azure CosmosDB Helper).  
@@ -10,6 +10,15 @@ Once your business logic has been built with LINQ statements with Azure CosmosDB
 This Repository contains Azure CosmosDB Helper Library source code and Hands on descriptions for how to use it.  
 
 ## Version History
+ - ### v 0.7.3 Update
+    - #### Access Azure CosmosDB with [Managed Identity](https://docs.microsoft.com/en-us/azure/active-directory/managed-identities-azure-resources/overview)
+        - [**EAE.Solutions.CosmosDB.Security.ManagedIdentity**](ManagedIdentity.md) has been released
+            - Get rid of secrets from your configuration or source code
+            - Retireve Azure Cosmos DB Connection Strings with Managed Identity (**DocumentDB Account Contributor Role**)
+            - Persistent Azure resource access with single Managed Identity
+            
+  
+
 - ### v 0.7 Update  
    - #### Change feed processor for Azure CosmosDB Core SQL API  
       - **Microsoft.Solutions.CosmosDB.SQL.ChangeFeed** (ChangeFeed Processor Helper) has been released  

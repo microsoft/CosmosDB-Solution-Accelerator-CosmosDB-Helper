@@ -12,13 +12,13 @@ namespace Microsoft.Solutions.CosmosDB.SQL.SDK.TODO.Service.Tests
     public class TODOServiceTests
     {
         static TODOService todoService;
-        static string connString = "{put your connection string}";
+        static string connString = "{PUT YOUR COSMOS SQL Core API CONNECTION STRING}";
         static string objectId;
 
         [TestInitialize]
         public void InitTest()
         {
-            todoService = new TODOService(connString, "COSMOS-SQLSDK");
+            todoService = new TODOService(connString, "COSMOS-SQLSDK", "CosmosToDo");
         }
 
 

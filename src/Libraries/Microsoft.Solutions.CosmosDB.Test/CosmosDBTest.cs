@@ -7,6 +7,7 @@ using System.Linq;
 using System;
 using Microsoft.Solutions.CosmosDB.Mongo;
 using Microsoft.Solutions.CosmosDB.SQL;
+using System.Collections.Generic;
 
 namespace Microsoft.Solutions.CosmosDB.Test
 {
@@ -15,7 +16,7 @@ namespace Microsoft.Solutions.CosmosDB.Test
     {
         public static IRepository<Person, string> repository = null;
 
-        private static string cosmossqlConn = "{PUT YOUR COSMOS SQL API CONNECTION STRING}";
+        private static string cosmossqlConn = "{PUT YOUR COSMOS SQL Core API CONNECTION STRING}";
         private static string cosmosmongoConn = "{PUT YOUR COSMOS MONGO API CONNECTION STRING}";
 
         private static dynamic Repository;
@@ -62,8 +63,8 @@ namespace Microsoft.Solutions.CosmosDB.Test
         [TestMethod]
         public async Task TEST03_Find()
         {
-            var person = await repository.FindAsync(new GenericSpecification<Person>(x => x.name == "person1"));
-            Assert.AreEqual(person.age, 30);
+            var people = await repository.FindAllAsync(new GenericSpecification<Person>(x => x.name.StartsWith("person")));
+            Assert.IsTrue(people.Count() > 0);
         }
 
         [TestMethod]
@@ -114,13 +115,13 @@ namespace Microsoft.Solutions.CosmosDB.Test
         }
 
         [TestMethod]
-        public async Task TEST07_GetAllAsync()
+        public async Task TEST07_FindAllAsync()
         {
-            var _30agedpeople = await repository.FindAllAsync(new GenericSpecification<Person>(x => x.age > 30));
-            var results = await repository.GetAllAsync(_30agedpeople.Select(x => x.id).ToArray());
+            var _over30agedpeople = await repository.FindAllAsync(new GenericSpecification<Person>(x => x.age > 30));
+            var results = await repository.GetAllAsync(_over30agedpeople.Select(x => x.id).ToArray());
 
             Console.WriteLine($"{results.Count()} objsts has been recorded");
-            Assert.AreEqual(results.Count(), _30agedpeople.Count());
+            Assert.AreEqual(results.Count(), _over30agedpeople.Count());
         }
 
         [TestMethod]

@@ -60,7 +60,7 @@ namespace Microsoft.Solutions.CosmosDB.TODO.WebHost
     {
         public static IServiceCollection AddCosmosHelper(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IDataRepositoryProvider<ToDo>, TODOService>(x => { return new TODOService(configuration["ConnectionString"], "CosmosHandson"); });
+            services.AddTransient<IDataRepositoryProvider<ToDo>, TODOService>(x => { return new TODOService(configuration["ConnectionString"], "CosmosHandson", "ToDoSample"); });
             
             return services;
         }
