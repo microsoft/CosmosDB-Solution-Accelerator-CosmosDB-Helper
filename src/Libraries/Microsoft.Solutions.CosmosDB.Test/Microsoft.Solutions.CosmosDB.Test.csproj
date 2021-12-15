@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -23,7 +23,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Microsoft.Solutions.CosmosDB.Mongo\Microsoft.Solutions.CosmosDB.Mongo.csproj" />
     <ProjectReference Include="..\Microsoft.Solutions.CosmosDB.SQL\Microsoft.Solutions.CosmosDB.SQL.csproj" />
-    <ProjectReference Include="..\Microsoft.Solutions.CosmosDB\Microsoft.Solutions.CosmosDB.csproj" />
   </ItemGroup>
 
 </Project>
