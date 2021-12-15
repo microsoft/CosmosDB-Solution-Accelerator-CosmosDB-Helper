@@ -17,5 +17,9 @@
     <PackageReference Include="MongoDB.Driver" Version="2.13.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Solutions.CosmosDB\Microsoft.Solutions.CosmosDB.csproj" />
+  </ItemGroup>
+
 
 </Project>
