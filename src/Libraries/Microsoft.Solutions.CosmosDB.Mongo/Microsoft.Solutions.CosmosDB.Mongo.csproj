@@ -9,30 +9,17 @@
     <Company>Microsoft Coporation</Company>
     <PackageDescription>This library helps using CosmosDB to developers...</PackageDescription>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);CopyProjectReferencesToPackage</TargetsForTfmSpecificBuildOutput>
     <PackageProjectUrl>https://github.com/microsoft/CosmosDB-Solution-Accelerator-CosmosDB-Helper</PackageProjectUrl>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <WarningsAsErrors>;NU1605;</WarningsAsErrors>
-    <NoWarn>1701;1702;NU5100</NoWarn>
-  </PropertyGroup>
-
   <ItemGroup>
+    <PackageReference Include="EAE.Solutions.CosmosDB" Version="0.7.3" />
     <PackageReference Include="MongoDB.Driver" Version="2.13.1" />
   </ItemGroup>
 
-
   <ItemGroup>
-    <ProjectReference Include="..\Microsoft.Solutions.CosmosDB\Microsoft.Solutions.CosmosDB.csproj">
-      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
-      <IncludeAssets>Microsoft.Solutions.CosmosDB.dll</IncludeAssets>
-    </ProjectReference>
+    <ProjectReference Include="..\Microsoft.Solutions.CosmosDB\Microsoft.Solutions.CosmosDB.csproj" />
   </ItemGroup>
-  <Target DependsOnTargets="ResolveReferences" Name="CopyProjectReferencesToPackage">
-    <ItemGroup>
-      <BuildOutputInPackage Include="@(ReferenceCopyLocalPaths-&gt;WithMetadataValue('ReferenceSourceTarget', 'ProjectReference'))" />
-    </ItemGroup>
-  </Target>
+
 
 </Project>
