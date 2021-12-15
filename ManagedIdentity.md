@@ -64,3 +64,5 @@ The **CosmosConnectionStrings** class contains 4 connection strings - Primary/Se
         public string SecondaryReadOnlyKey { get; set; }
     }
 ```
+
+You may check the [Sample Application code](src/Sample/Microsoft.Solutions.CosmosDB.WebHost/Startup.cs) for it from here - [Web Host Sample](src/Sample/Microsoft.Solutions.CosmosDB.WebHost)

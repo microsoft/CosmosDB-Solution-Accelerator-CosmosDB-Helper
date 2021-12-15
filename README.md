@@ -17,8 +17,6 @@ This Repository contains Azure CosmosDB Helper Library source code and Hands on 
             - Retireve Azure Cosmos DB Connection Strings with Managed Identity (**DocumentDB Account Contributor Role**)
             - Persistent Azure resource access with single Managed Identity
             
-  
-
 - ### v 0.7 Update  
    - #### Change feed processor for Azure CosmosDB Core SQL API  
       - **Microsoft.Solutions.CosmosDB.SQL.ChangeFeed** (ChangeFeed Processor Helper) has been released  
