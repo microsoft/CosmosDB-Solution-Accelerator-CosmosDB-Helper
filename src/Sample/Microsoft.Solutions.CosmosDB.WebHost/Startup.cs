@@ -7,8 +7,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Microsoft.Solutions.CosmosDB.Security.ManagedIdentity;
 using Microsoft.Solutions.CosmosDB.SQL.SDK.TODO.Service;
 using Microsoft.Solutions.CosmosDB.SQL.SDK.TODO.Service.Models;
+using System.Threading.Tasks;
 
 namespace Microsoft.Solutions.CosmosDB.TODO.WebHost
 {
@@ -60,9 +62,28 @@ namespace Microsoft.Solutions.CosmosDB.TODO.WebHost
     {
         public static IServiceCollection AddCosmosHelper(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddTransient<IDataRepositoryProvider<ToDo>, TODOService>(x => { return new TODOService(configuration["ConnectionString"], "CosmosHandson", "ToDoSample"); });
+            services.AddTransient<IDataRepositoryProvider<ToDo>, TODOService>(x => { return new TODOService(ConnectionStringHelper.GetConnectionString(configuration).Result, "CosmosHandson", "ToDoSample"); });
             
             return services;
         }
     }
+
+    static class ConnectionStringHelper
+    {
+        private static string _connectionString;
+        
+        public async static Task<string> GetConnectionString(IConfiguration Configuration)
+        {
+            if (!string.IsNullOrEmpty(ConnectionStringHelper._connectionString)) return ConnectionStringHelper._connectionString;
+            
+            var objConnectionStrings =  await ConnectionStringAccessor.Create(Configuration["App:SubscriptionId"], 
+                                                                              Configuration["App:ResourceGroupName"], 
+                                                                              Configuration["App:DatabaseAccountName"])
+                                                                      .GetConnectionStringsAsync(Configuration["App:ManagedIdentityId"]);
+            ConnectionStringHelper._connectionString = objConnectionStrings.PrimaryReadWriteKey;
+
+            return ConnectionStringHelper._connectionString;
+        }
+    }
+
 }
