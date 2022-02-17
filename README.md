@@ -1,5 +1,4 @@
-# Azure CosmosDB Solution Accelerator for Developers </br>(Azure CosmosDB Helper Library)
-
+![GitHubBanner](media/DBHelperBanner.png)
 ## About this repository
 Welcome to Azure CosmosDB Solution Accelerator (Azure CosmosDB Helper).  
 
