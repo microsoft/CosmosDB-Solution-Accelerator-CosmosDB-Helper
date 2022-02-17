@@ -4,10 +4,10 @@
 Welcome to Azure CosmosDB Solution Accelerator (Azure CosmosDB Helper).  
 
 Azure CosmosDB Helper supports MongoDB API and SQL Core API interface with LINQ statements.  
-Developers can their Business Entities CRUD Operations without learning specific query languages for each APIs.  
-Once your business logic has been built with LINQ statements with Azure CosmosDB Helper, you may easily switch two APIs with very few code changes.    
+It abstracts how data can be persisted and retrived from Database by implmenting Repository Pattern.  
+In Architecture perspective, it decouples the data access layer from business layer so developers can their Business Entities CRUD Operations through much streightforward way without learning specific query languages for each APIs.  
 
-This Repository contains Azure CosmosDB Helper Library source code and Hands on descriptions for how to use it.  
+Once your business logic has been built with LINQ statements with Azure CosmosDB Helper, you may easily switch two APIs (SQL and Mongo) with very few code changes.  
 
 ## Version History
  - ### v 0.7.3 Update
@@ -63,11 +63,6 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
-
-## Note about Libraries with MPL-2.0 and LGPL-2.1 Licenses   
-The following libraries are not **explicitly included** in this repository, but users who use this Solution Accelerator may need to install them locally and in Azure Synapse to fully utilize this Solution Accelerator. However, the actual binaries and files associated with the libraries **are not included** as part of this repository, but they are available for installation via the PyPI library using the pip installation tool.  
-  
-Libraries: chardet, certifi, pathspec
 
 ## Contributing
 
