@@ -6,7 +6,7 @@
     <PackageId>EAE.Solutions.CosmosDB.Mongo</PackageId>
     <Version>0.7.3</Version>
     <Authors>Microsoft Solutions</Authors>
-    <Company>Microsoft Coporation</Company>
+    <Company>Microsoft Corporation</Company>
     <PackageDescription>This library helps using CosmosDB to developers...</PackageDescription>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/microsoft/CosmosDB-Solution-Accelerator-CosmosDB-Helper</PackageProjectUrl>

@@ -6,7 +6,7 @@
     <PackageId>EAE.Solutions.CosmosDB</PackageId>
     <Version>0.7.3</Version>
     <Authors>Microsoft Solutions</Authors>
-    <Company>Microsoft Coporation</Company>
+    <Company>Microsoft Corporation</Company>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
